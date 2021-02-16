@@ -1,12 +1,61 @@
 // @generated: @expo/next-adapter@2.1.52
+import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, Linking } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from './home';
+import RepScreen from './representatives'
+import ElectionScreen from './elections'
+import PollScreen from './polling'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+const Tab = createMaterialBottomTabNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Welcome to Expo + Next.js 👋</Text>
-    </View>
+
+  <NavigationContainer>
+    <Tab.Navigator
+    initialRouteName="Home" 
+    >
+      <Tab.Screen name="Home"
+       component={HomeScreen} 
+       options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="home" color={color} size={26} />
+        ),
+      }}
+       />
+      <Tab.Screen name="Representatives"
+       component={RepScreen}
+       options={{
+        tabBarLabel: 'Representatives',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="account-group" color={color} size={26} />
+        ),
+      }}
+        />
+      <Tab.Screen name="Polling"
+       component={PollScreen}
+       options={{
+        tabBarLabel: 'Polls',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="map-marker" color={color} size={26} />
+        ),
+      }}
+        />
+      <Tab.Screen name="Election"
+       component={ElectionScreen}
+       options={{
+        tabBarLabel: 'Elections',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="archive-arrow-up" color={color} size={26} />
+        ),
+      }}
+        />
+    </Tab.Navigator>
+  </NavigationContainer>
   );
 }
 
